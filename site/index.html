@@ -928,14 +928,14 @@ body.variant .design-pick select{background-color:#ffffffcc;border-color:var(--v
   html body header.shell .shell-tools{gap:4px;min-width:0;margin-left:auto}
   html body header.shell .shell-tools .design-pick span{display:none}
   html body header.shell .shell-tools .design-pick select{max-width:98px;font-size:11px}
-  html body header.shell .shell-tools button{padding:7px 8px;font-size:10.5px;white-space:nowrap}
+  html body header.shell .shell-tools button{padding:7px 8px!important;font-size:10.5px!important;white-space:nowrap}
 }
 
 @media(max-width:380px){
   html body header.shell{padding:0 8px}
   html body header.shell .shell-tools{gap:3px}
   html body header.shell .shell-tools .design-pick select{max-width:82px;font-size:10px}
-  html body header.shell .shell-tools button{padding:7px 6px;font-size:10px}
+  html body header.shell .shell-tools button{padding:7px 6px!important;font-size:10px!important}
 }
 
 /* --- Light editions: remove blueprint grid, softer canvas --- */
@@ -1107,10 +1107,15 @@ html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .notes-body .note
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky).overview .transport{
   background:color-mix(in srgb,var(--v-bg) 94%,transparent)!important;border-top:1px solid var(--v-line);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+/* ===== "모바일 버전" button: keep the header on one line on phones ===== */
+@media(max-width:560px){
+  html body header.shell #fullscreen-btn{display:none}
+}
 </style>
 </head>
 <body>
-<header class="shell"><div class="brand">KMLA<span>CURRICULUM / \uAD50\uC721\uACFC\uC815 \uC18C\uAC1C</span></div><div class="shell-tools"><button id="toc-btn" title="\uBAA9\uCC28 (T)">\uBAA9\uCC28</button><button id="notes-btn" title="\uBC1C\uD45C\uC790 \uC124\uBA85 (N)">\uBC1C\uD45C \uB178\uD2B8</button><button id="overview-btn" title="\uC804\uCCB4 \uC2AC\uB77C\uC774\uB4DC \uBCF4\uAE30 (O)">\uC804\uCCB4 \uBCF4\uAE30</button><button id="fullscreen-btn" title="\uC804\uCCB4\uD654\uBA74 (F)">\uC804\uCCB4\uD654\uBA74</button></div></header>
+<header class="shell"><div class="brand">KMLA<span>CURRICULUM / \uAD50\uC721\uACFC\uC815 \uC18C\uAC1C</span></div><div class="shell-tools"><button id="mobile-btn" title="모바일 버전으로 보기" onclick="top.location.href=top.location.origin+top.location.pathname.replace(/[^/]*$/,'')+'m/'">모바일 버전</button><button id="toc-btn" title="\uBAA9\uCC28 (T)">\uBAA9\uCC28</button><button id="notes-btn" title="\uBC1C\uD45C\uC790 \uC124\uBA85 (N)">\uBC1C\uD45C \uB178\uD2B8</button><button id="overview-btn" title="\uC804\uCCB4 \uC2AC\uB77C\uC774\uB4DC \uBCF4\uAE30 (O)">\uC804\uCCB4 \uBCF4\uAE30</button><button id="fullscreen-btn" title="\uC804\uCCB4\uD654\uBA74 (F)">\uC804\uCCB4\uD654\uBA74</button></div></header>
 <main class="viewport"><div class="stage" id="stage" aria-label="\uAD50\uC721\uACFC\uC815 \uD504\uB808\uC820\uD14C\uC774\uC158"></div></main>
 <footer class="transport"><div class="paging"><button id="prev" aria-label="\uC774\uC804 \uC2AC\uB77C\uC774\uB4DC">\u2190</button><span class="counter" id="counter" aria-live="polite"></span><button id="next" aria-label="\uB2E4\uC74C \uC2AC\uB77C\uC774\uB4DC">\u2192</button></div><div class="progress" aria-hidden="true"><div id="progress-fill"></div></div><div class="section-label" id="section-label"></div></footer>
 <dialog class="dialog" id="toc"><div class="dialog-head"><h2>\uAD50\uC721\uACFC\uC815\uC758 \uC804\uCCB4 \uC9C0\uB3C4</h2><button class="close" data-close="toc">\uB2EB\uAE30</button></div><div class="toc-body" id="toc-body"></div></dialog>
