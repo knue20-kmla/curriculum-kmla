@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "KMLA Curriculum Explorer"
+description = "민족사관고등학교 교육과정을 학생과 학부모가 진로별 경로, 과목 계열, 교육과정 구조로 탐색할 수 있는 한국어 웹앱입니다."
+version = "1.0.0"
+id = "artifacts/kmla-curriculum"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18292
+
+[services.development]
+run = "pnpm --filter @workspace/kmla-curriculum run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kmla-curriculum", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/kmla-curriculum/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18292"
+BASE_PATH = "/"
