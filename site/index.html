@@ -936,13 +936,13 @@ html body.variant.theme-sky .slide:before{background-image:none!important}
 
 /* --- Palettes: stronger text contrast, hairline borders, layered soft shadows --- */
 html body.variant.theme-waygo{
-  --v-bg:#f8f5f0;--v-paper:#fffdf9;--v-ink:#2a2622;--v-muted:#5f574e;--v-accent:#80533a;--v-soft:#f0e9de;--v-line:#e3dacd;
+  --v-bg:#f8f5f0;--v-paper:#fffdf9;--v-ink:#2a2622;--v-muted:#4f4840;--v-accent:#6f4630;--v-soft:#f0e9de;--v-line:#e3dacd;
   --v-radius:16px;--v-shadow:0 1px 2px #3a2a1a0d,0 16px 34px -16px #3a2a1a26}
 html body.variant.theme-editorial{
-  --v-bg:#f4f7f7;--v-paper:#fff;--v-ink:#12343f;--v-muted:#4a6470;--v-accent:#1f5a6b;--v-soft:#e4eef1;--v-line:#cfdde2;
+  --v-bg:#f4f7f7;--v-paper:#fff;--v-ink:#12343f;--v-muted:#3c5663;--v-accent:#1b5160;--v-soft:#e4eef1;--v-line:#cfdde2;
   --v-radius:8px;--v-shadow:0 1px 2px #12343f0d,0 14px 30px -18px #12343f40}
 html body.variant.theme-sky{
-  --v-bg:#f6faff;--v-paper:#ffffffe6;--v-ink:#14284a;--v-muted:#485e80;--v-accent:#2a5fd1;--v-soft:#e7efff;--v-line:#d0ddf3;
+  --v-bg:#f6faff;--v-paper:#ffffffe6;--v-ink:#14284a;--v-muted:#3a5073;--v-accent:#2455c4;--v-soft:#e7efff;--v-line:#d0ddf3;
   --v-radius:20px;--v-shadow:0 1px 2px #1f4fb412,0 18px 38px -18px #2a5fd14d}
 
 /* Pale subtitle / body copy on cards was nearly invisible on the light canvas */
@@ -973,7 +973,8 @@ html body.variant.theme-editorial .slide{padding-left:72px}
 html body.variant.theme-editorial .slide:before{inset:44px auto 48px 40px;width:3px;border-radius:3px;background:linear-gradient(var(--v-accent),#3d8f8a 60%,transparent)}
 html body.variant.theme-editorial .slide>h2{background:transparent;color:var(--v-ink);padding:0;font-size:40px;line-height:1.2}
 html body.variant.theme-editorial .slide>h2 em{color:var(--v-accent)}
-html body.variant.theme-editorial .slide>h2:after{display:block;content:"";width:44px;height:3px;margin-top:14px;border-radius:3px;background:var(--v-accent)}
+html body.variant.theme-editorial .slide>h2:after{display:none!important}
+html body.variant.theme-editorial .slide>h2{padding-bottom:16px;background:linear-gradient(var(--v-accent),var(--v-accent)) 0 100%/44px 3px no-repeat}
 html body.variant.theme-editorial .slide .ap-column header,
 html body.variant.theme-editorial .slide .research-content header{border-radius:6px}
 html body.variant.theme-sky .slide>h2 em{background:linear-gradient(100deg,#2a5fd1,#2a8fb0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -1002,6 +1003,56 @@ html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .lane-cour
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .lane-course,
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .lane-course :is(span,small,b,strong){color:var(--v-ink)}
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .lane-course>small{color:var(--v-muted)}
+
+/* ===== Legibility fixes on the light editions ===== */
+/* Callout notes (e.g. "AP 34개는 전문Ⅱ 68개에 포함됩니다.") */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .callout{
+  background:var(--v-soft)!important;color:var(--v-ink)!important;border:1px solid var(--v-line)!important;
+  border-left:3px solid var(--v-accent)!important;border-radius:var(--v-radius)!important;box-shadow:none!important;
+  font-family:inherit!important;font-weight:500;padding:14px 20px}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .callout b{color:var(--v-accent)!important}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide.comparison-slide .callout{
+  background:var(--v-soft)!important;color:var(--v-ink)!important}
+
+/* Footer "KMLA / 01" marker */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide.active .foot .mark,
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide>.foot .mark{color:var(--v-muted)!important}
+
+/* Tags on cards */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide :is(.tag,.panel .tag){
+  color:var(--v-accent)!important;background:color-mix(in srgb,var(--v-accent) 9%,#fff)!important;
+  border:1px solid color-mix(in srgb,var(--v-accent) 32%,#fff)!important}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-breadth-card__top strong{color:var(--v-accent)}
+
+/* Inline "교과 이동" / "세부" selectors: dark pills become light pills */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__control{
+  background:var(--v-paper);color:var(--v-ink);border-color:var(--v-line);border-radius:999px;box-shadow:var(--v-shadow)}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__trigger:hover,
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__trigger[aria-expanded="true"]{
+  background:#fff;border-color:var(--v-accent)}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__label{color:var(--v-accent)!important}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__select{color:var(--v-ink)}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .kmla-inline-nav__select option{color:#1b2630;background:#fff}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide :is(.kmla-inline-nav__trigger svg,.kmla-inline-nav__select-wrap svg){color:var(--v-accent)}
+
+/* Comparison chart labels */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .chart-label,
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .chart-row.other .chart-label{color:var(--v-ink)!important}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide .chart-label small{color:var(--v-muted)!important}
+
+/* Small supporting text: never fade it with opacity on the light editions */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide :is(.foot,.foot span,.section-kicker,small,p.sub,.hero-copy,.hero-kicker,.gold-label,.vision-source,.research-index,.step){opacity:1!important}
+
+/* Sky edition: keep the mobile scale-down when the hero diagram is tilted */
+@media(max-width:760px){
+  html body.variant.theme-sky .slide .hero-diagram{transform:scale(.75) rotate(-2deg);transform-origin:center top}
+}
+
+/* Editorial edition: slimmer left gutter on phones */
+@media(max-width:760px){
+  html body.variant.theme-editorial .slide{padding-left:34px}
+  html body.variant.theme-editorial .slide:before{left:16px}
+}
 </style>
 </head>
 <body>
