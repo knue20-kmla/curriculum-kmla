@@ -1071,10 +1071,8 @@ html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .slide :is(.foot,
   html body.variant.theme-editorial .slide:before{left:16px}
 }
 
-/* ===== Phones: "전체 보기" (overview) must stack slide content vertically ===== */
-@media(max-width:760px){
-  html body.overview .slide{flex-direction:column}
-}
+/* ===== "전체 보기" (overview): thumbnails must lay slide content out vertically at every width ===== */
+html body.overview .slide{flex-direction:column}
 
 /* ===== Editorial: left-aligned titles on every slide ===== */
 html body.variant.theme-editorial .slide>h2{text-align:left}
@@ -1104,6 +1102,11 @@ html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .toc-item em{colo
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .notes-body{color:var(--v-ink)}
 html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) .notes-body .note-source{
   color:var(--v-muted);border-top-color:var(--v-line)}
+
+/* Overview: sticky control bar needs its own backdrop on the light editions */
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky).overview .transport{
+  background:color-mix(in srgb,var(--v-bg) 94%,transparent)!important;border-top:1px solid var(--v-line);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 </style>
 </head>
 <body>
