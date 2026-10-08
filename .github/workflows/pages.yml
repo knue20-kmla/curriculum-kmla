@@ -14,33 +14,17 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# 사이트는 site/ 폴더의 정적 파일(단독 실행형 HTML)을 그대로 배포합니다.
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @workspace/kmla-curriculum run build
-        env:
-          PORT: "3000"
-          BASE_PATH: /curriculum-kmla/
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: artifacts/kmla-curriculum/dist/public
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
       - id: deployment
         uses: actions/deploy-pages@v4
