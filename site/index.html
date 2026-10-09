@@ -380,22 +380,10 @@
     .enter .arrow { display: inline-block; transition: transform .25s ease; }
     .enter:hover, .enter:focus-visible { background: var(--gold); border-color: var(--gold); color: #12261f; }
     .enter:hover .arrow, .enter:focus-visible .arrow { transform: translateX(5px); }
-    .enter:focus-visible, .enter-alt:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-
-    .enter-alt {
-      color: rgba(255, 255, 255, .78);
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 5px;
-      text-decoration-color: rgba(255, 255, 255, .36);
-    }
-    .enter-alt:hover { color: #fff; text-decoration-color: var(--gold); }
+    .enter:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
 
     @media (max-width: 700px) {
       .enter { width: 100%; justify-content: center; min-height: 54px; }
-      .enter-row { gap: 12px; }
-      .enter-alt { margin-inline: auto; }
     }
 
 
@@ -417,14 +405,8 @@
       background: rgba(255, 255, 255, .06); color: #fff; font: 700 12px "Noto Sans KR", sans-serif; cursor: pointer;
     }
     .qr-close:hover { background: rgba(255, 255, 255, .14); }
-    .qr-close:focus-visible, .qr-tabs button:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-    .qr-tabs { display: flex; width: max-content; gap: 4px; margin: 14px auto 0; padding: 4px; border-radius: 999px; background: rgba(255, 255, 255, .1); }
-    .qr-tabs button {
-      min-height: 38px; padding: 8px 18px; border: 0; border-radius: 999px; background: transparent;
-      color: rgba(255, 255, 255, .82); font: 700 13px "Noto Sans KR", sans-serif; cursor: pointer;
-    }
-    .qr-tabs button[aria-selected="true"] { background: var(--gold); color: #12261f; }
-    .qr-code { box-sizing: border-box; width: min(72vw, 320px); aspect-ratio: 1; margin: 18px auto 0; padding: 14px; border-radius: 14px; background: #fff; box-shadow: 0 10px 34px rgba(0, 0, 0, .35); }
+    .qr-close:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .qr-code { box-sizing: border-box; width: min(72vw, 320px); aspect-ratio: 1; margin: 16px auto 0; padding: 14px; border-radius: 14px; background: #fff; box-shadow: 0 10px 34px rgba(0, 0, 0, .35); }
     .qr-code svg { display: block; width: 100%; height: 100%; }
     .qr-url { margin: 14px 24px 0; text-align: center; font-size: 12.5px; line-height: 1.5; word-break: break-all; color: rgba(255, 255, 255, .86); }
     .qr-hint { margin: 6px 24px 24px; text-align: center; font-size: 12px; color: rgba(255, 255, 255, .64); }
@@ -527,7 +509,6 @@
       .school-name { margin-top: 14px; }
       .enter-row { margin-top: 16px; flex-wrap: nowrap; }
       .enter { width: auto; min-height: 44px; padding: 0 22px; }
-      .enter-alt { margin-inline: 0; white-space: nowrap; }
       .baseline { display: none; }
     }
   </style>
@@ -559,7 +540,6 @@
         <div class="school-name">Korean Minjok Leadership Academy · Since 1996</div>
         <div class="enter-row">
           <a class="enter" id="enter" href="app/">교육과정 살펴보기 <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="enter-alt" id="enter-alt" href="m/">모바일 버전으로 보기</a>
         </div>
         <div class="baseline" aria-hidden="true"></div>
       </div>
@@ -574,18 +554,6 @@
       var hero = document.getElementById('hero-content');
       var heroSurface = document.getElementById('hero');
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      // Phones: primary button opens the mobile edition, the small link the web edition.
-      function route() {
-        var enter = document.getElementById('enter');
-        var alt = document.getElementById('enter-alt');
-        var phone = window.matchMedia('(max-width: 760px)').matches;
-        enter.setAttribute('href', phone ? 'm/' : 'app/');
-        alt.setAttribute('href', phone ? 'app/' : 'm/');
-        alt.textContent = phone ? '웹 버전으로 보기' : '모바일 버전으로 보기';
-      }
-      route();
-      window.matchMedia('(max-width: 760px)').addEventListener('change', route);
 
       if (!reduceMotion) {
         heroSurface.addEventListener('pointermove', function (event) {
@@ -614,10 +582,6 @@
   </script>
   <dialog class="qr-dialog" id="qr-dialog" aria-labelledby="qr-title">
     <div class="qr-head"><h2 id="qr-title">QR로 접속</h2><button class="qr-close" type="button">닫기</button></div>
-    <div class="qr-tabs" role="tablist" aria-label="접속 버전 선택">
-      <button type="button" role="tab" data-qr="web" aria-selected="false">웹 버전</button>
-      <button type="button" role="tab" data-qr="m" aria-selected="true">모바일 버전</button>
-    </div>
     <div class="qr-code" id="qr-code" role="img" aria-label="접속 QR 코드"></div>
     <p class="qr-url" id="qr-url"></p>
     <p class="qr-hint" id="qr-hint"></p>
@@ -2922,7 +2886,7 @@ var qrcode = function() {
     return qrcode;
 }));
 
-/* ---- Landing page QR popup ---- */
+/* ---- Landing page QR popup (web edition only) ---- */
 function qrSvg(text) {
   var q = qrcode(0, 'M');
   q.addData(text);
@@ -2937,44 +2901,28 @@ function qrSvg(text) {
     '" shape-rendering="crispEdges" role="img" aria-label="QR"><path d="' + d + '" fill="#000"/></svg>';
 }
 
-function siteUrls() {
-  // The landing page lives at <site>/ ; the web app is <site>/app/ and the phone edition <site>/m/.
+function webUrl() {
+  // The landing page lives at <site>/ and the web app at <site>/app/.
   var l = window.location;
   var origin = (l.origin && l.origin !== 'null') ? l.origin : '';
   var dir = origin ? l.pathname.replace(/[^\/]*$/, '') : l.href.replace(/[?#].*$/, '').replace(/[^\/]*$/, '');
-  var base = origin + dir;
-  return { web: base + 'app/', m: base + 'm/' };
+  return origin + dir + 'app/';
 }
-
-var HINTS = {
-  web: '휴대폰 카메라로 비추면 웹 버전으로 접속됩니다.',
-  m: '휴대폰 카메라로 비추면 모바일 전용 화면으로 접속됩니다.'
-};
 
 var dlg = document.getElementById('qr-dialog');
 var openBtn = document.getElementById('qr-open');
 
-function render(which) {
-  var url = siteUrls()[which];
-  document.getElementById('qr-code').innerHTML = qrSvg(url);
-  document.getElementById('qr-url').textContent = url;
-  document.getElementById('qr-hint').textContent = HINTS[which];
-  var tabs = dlg.querySelectorAll('.qr-tabs button');
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].setAttribute('aria-selected', String(tabs[i].getAttribute('data-qr') === which));
-  }
-}
-
 if (dlg && openBtn) {
   openBtn.addEventListener('click', function () {
-    render('m');
+    var url = webUrl();
+    document.getElementById('qr-code').innerHTML = qrSvg(url);
+    document.getElementById('qr-url').textContent = url;
+    document.getElementById('qr-hint').textContent = '휴대폰 카메라로 비추면 바로 접속됩니다.';
     if (typeof dlg.showModal === 'function') dlg.showModal();
   });
   dlg.addEventListener('click', function (e) {
     var t = e.target;
     if (t === dlg) { dlg.close(); return; }
-    var tab = t.closest ? t.closest('.qr-tabs button') : null;
-    if (tab) { render(tab.getAttribute('data-qr')); return; }
     var closeBtn = t.closest ? t.closest('.qr-close') : null;
     if (closeBtn) dlg.close();
   });
