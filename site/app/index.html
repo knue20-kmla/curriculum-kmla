@@ -1320,12 +1320,12 @@ function courseTile(c){const i=LEVELS.indexOf(c.level);return \`<div class="full
 for(const [key,pages] of fullSlideGroups){
  const [category,group]=key.split('|');
  if(category==='\uC81C2\uC678\uAD6D\uC5B4')continue;
- let items=ALL.filter(c=>c.category===category&&(!['\uACFC\uD559','\uC0AC\uD68C'].includes(category)||field(c)===group)&&c.name!=='\uC2DC\uBBAC\uB808\uC774\uC158 \uD654\uD559').sort((a,b)=>LEVELS.indexOf(a.level)-LEVELS.indexOf(b.level));
+ let items=ALL.filter(c=>c.category===category&&(!['\uACFC\uD559','\uC0AC\uD68C'].includes(category)||field(c)===group)).sort((a,b)=>LEVELS.indexOf(a.level)-LEVELS.indexOf(b.level));
  const per=Math.ceil(items.length/pages.length);
  pages.forEach((s,i)=>{
   const part=items.slice(i*per,(i+1)*per);
   s.body=\`<div class="subject-top"><div><span class="gold-label">SUBJECT CURRICULUM</span><h3>\${group}</h3></div><div class="subject-total"><b>\${items.length}</b><span>\uACFC\uBAA9\${pages.length>1?' \xB7 '+(i+1)+' / '+pages.length:''}</span></div></div><div class="level-board">\${LEVELS.map((level,j)=>{const list=part.filter(c=>c.level===level);return list.length?\`<section class="level-band" data-tier="\${j}" style="--tier:\${COLORS[j]}"><div class="level-label"><span>0\${j+1}</span><b>\${LVN[j]}</b></div><div class="level-courses">\${list.map(courseTile).join('')}</div></section>\`:''}).join('')}</div>\`;
-  s.notes=\`\${category}\uC758 \${group} \uACFC\uBAA9\uC744 \uACF5\uD1B5 \u2192 \uC120\uD0DD \u2192 \uC804\uBB38\u2160 \u2192 \uC804\uBB38\u2161 \uC21C\uC11C\uB85C \uBC30\uC5F4\uD588\uC2B5\uB2C8\uB2E4. \uAC01 \uC218\uC900\uC744 \uBCC4\uB3C4\uC758 \uAC00\uB85C \uAD6C\uAC04\uACFC \uB3D9\uC77C\uD55C \uC0C9\uC73C\uB85C \uAD6C\uBD84\uD569\uB2C8\uB2E4.\${group==='\uD654\uD559'?' \uC694\uCCAD\uC5D0 \uB530\uB77C \uC2DC\uBBAC\uB808\uC774\uC158 \uD654\uD559\uC740 \uBCF8\uBB38\uC5D0\uC11C \uC81C\uC678\uD588\uC2B5\uB2C8\uB2E4. \uBD80\uB85D\uACFC \uAD50\uC721\uACFC\uC815 \uC804\uCCB4 \uC9D1\uACC4\uB294 \uC6D0\uBCF8 \uD3B8\uC81C\uD45C\uB97C \uBCF4\uC874\uD569\uB2C8\uB2E4.':''}\`;
+  s.notes=\`\${category}\uC758 \${group} \uACFC\uBAA9\uC744 \uACF5\uD1B5 \u2192 \uC120\uD0DD \u2192 \uC804\uBB38\u2160 \u2192 \uC804\uBB38\u2161 \uC21C\uC11C\uB85C \uBC30\uC5F4\uD588\uC2B5\uB2C8\uB2E4. \uAC01 \uC218\uC900\uC744 \uBCC4\uB3C4\uC758 \uAC00\uB85C \uAD6C\uAC04\uACFC \uB3D9\uC77C\uD55C \uC0C9\uC73C\uB85C \uAD6C\uBD84\uD569\uB2C8\uB2E4.\`;
  });
 }
 const languageNames=['\uC2A4\uD398\uC778\uC5B4','\uD504\uB791\uC2A4\uC5B4','\uC911\uAD6D\uC5B4','\uD55C\uBB38'];
