@@ -1130,6 +1130,22 @@ html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) #qr .qr-code{bord
 @media(max-width:760px){
   html body header.shell #qr-btn{display:none}
 }
+
+/* ===== "모바일 버전" menu item: different in nature from the other tools, so it is emphasized ===== */
+html body header.shell #mobile-btn{display:inline-flex;align-items:center;gap:7px;font-weight:800;background:#e5d2a2;color:#1d2a1f;border-color:#e5d2a2;box-shadow:0 5px 16px -5px rgba(229,210,162,.6)}
+html body header.shell #mobile-btn::before{content:"";flex:0 0 auto;box-sizing:border-box;width:9px;height:14px;border:1.7px solid currentColor;border-radius:2.5px;background:linear-gradient(currentColor,currentColor) center bottom 2px/3px 1.5px no-repeat}
+html body header.shell #mobile-btn:hover,html body header.shell #mobile-btn:focus-visible{background:#f2e4bb;border-color:#f2e4bb;color:#1d2a1f}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) header.shell #mobile-btn{background:var(--v-accent);color:#fff;border-color:var(--v-accent);box-shadow:0 6px 16px -6px color-mix(in srgb,var(--v-accent) 75%,transparent)}
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) header.shell #mobile-btn:hover,
+html body.variant:is(.theme-waygo,.theme-editorial,.theme-sky) header.shell #mobile-btn:focus-visible{background:color-mix(in srgb,var(--v-accent) 86%,#000);border-color:color-mix(in srgb,var(--v-accent) 86%,#000);color:#fff}
+@media(max-width:380px){
+  html body header.shell #mobile-btn{gap:0}
+  html body header.shell #mobile-btn::before{display:none}
+}
+
+/* Header tools stay on one line (the brand text wraps instead) */
+html body header.shell .shell-tools button,html body header.shell .shell-tools .design-pick{white-space:nowrap}
+html body header.shell .shell-tools{flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -1612,7 +1628,6 @@ lucide-react/dist/esm/lucide-react.js:
    *)
 */
 </script>
-<script id="kmla-theme-sync">(function(){var r=document.documentElement;function s(){try{var f=document.querySelector("iframe");var b=f&&f.contentDocument&&f.contentDocument.body;if(!b)return;var m=/theme-(waygo|editorial|sky)/.exec(b.className);var l=b.classList.contains("variant")&&m;r.setAttribute("data-deck-light",l?"1":"0");if(m)r.setAttribute("data-deck-theme",m[1]);else r.removeAttribute("data-deck-theme")}catch(e){}}setInterval(s,400);s()})();</script>
 <script id="kmla-qr">(function(){
 //---------------------------------------------------------------------
 //
@@ -3999,4 +4014,5 @@ setInterval(ensure, 400);
 ensure();
 
 })();</script>
+<script id="kmla-theme-sync">(function(){var r=document.documentElement;function s(){try{var f=document.querySelector("iframe");var b=f&&f.contentDocument&&f.contentDocument.body;if(!b)return;var m=/theme-(waygo|editorial|sky)/.exec(b.className);var l=b.classList.contains("variant")&&m;r.setAttribute("data-deck-light",l?"1":"0");if(m)r.setAttribute("data-deck-theme",m[1]);else r.removeAttribute("data-deck-theme")}catch(e){}}setInterval(s,400);s()})();</script>
 </body></html>
